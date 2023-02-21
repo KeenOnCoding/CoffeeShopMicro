@@ -13,6 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cashier", "Cashier", "{3974
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeShopMicro.Cashier.Api", "src\server\CoffeeShopMicro.Cashier\CoffeeShopMicro.Cashier.Api.csproj", "{F60101A6-0481-425B-964C-2BFA11B13BA1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Manager", "Manager", "{4AC0B228-D6CC-4146-8E8F-9571A50D3CB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeShopMicro.Manager.Api", "src\server\CoffeeShopMicro.Manager\CoffeeShopMicro.Manager.Api.csproj", "{70692E7C-FC6D-4EB7-9FDA-E342CFDFD4E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,10 @@ Global
 		{F60101A6-0481-425B-964C-2BFA11B13BA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F60101A6-0481-425B-964C-2BFA11B13BA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F60101A6-0481-425B-964C-2BFA11B13BA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70692E7C-FC6D-4EB7-9FDA-E342CFDFD4E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70692E7C-FC6D-4EB7-9FDA-E342CFDFD4E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70692E7C-FC6D-4EB7-9FDA-E342CFDFD4E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70692E7C-FC6D-4EB7-9FDA-E342CFDFD4E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +44,8 @@ Global
 		{970D554D-45A3-45F0-A6A3-D066BAD49832} = {011ACFDF-6685-49B6-870A-57B22CA9E212}
 		{3974B8E1-A01D-44E5-84B1-C09D73F5643C} = {CE70B926-59AF-439B-BE23-70C6B2C6B518}
 		{F60101A6-0481-425B-964C-2BFA11B13BA1} = {3974B8E1-A01D-44E5-84B1-C09D73F5643C}
+		{4AC0B228-D6CC-4146-8E8F-9571A50D3CB7} = {CE70B926-59AF-439B-BE23-70C6B2C6B518}
+		{70692E7C-FC6D-4EB7-9FDA-E342CFDFD4E5} = {4AC0B228-D6CC-4146-8E8F-9571A50D3CB7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {26E787F5-E3E3-4D99-91AB-5BCD0F2EF798}
