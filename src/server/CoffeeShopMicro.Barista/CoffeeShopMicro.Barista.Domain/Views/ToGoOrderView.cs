@@ -1,7 +1,7 @@
-﻿using CoffeeShopMicro.Barista.Domain.Entities;
-
-namespace CoffeeShopMicro.Barista.Domain.Views
+﻿namespace CoffeeShopMicro.Barista.Domain.Views
 {
+    using CoffeeShopMicro.Barista.Domain.Entities;
+
     public class ToGoOrderView
     {
         public Guid Id { get; set; }
