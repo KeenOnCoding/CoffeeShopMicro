@@ -2,7 +2,9 @@
 {
     using CoffeeShopMicro.Barista.Domain.Entities;
     using CoffeeShopMicro.Barista.Domain.Repositories;
+    using MediatR;
     using Microsoft.EntityFrameworkCore;
+    using CoffeeShopMicro.Tools.Optional;
 
     public class BaristaRepository : IBaristaRepository
     {
@@ -13,30 +15,25 @@
             _dbContext = dbContext;
         }
 
-        public async Task<Barista> Add(Barista barista)
+        public async Task<Unit> Add(Barista barista)
         {
-            var result =  _dbContext.Baristas.Add(barista);
-
+            _dbContext.Baristas.Add(barista);
             await _dbContext.SaveChangesAsync();
-
-            return result.Entity;
+            return Unit.Value;
         }
 
-        public async Task<Barista> Get(Guid id)
-        {
-            var result =  await _dbContext.Baristas
-                .AsNoTracking()
-                .Include(b => b.CompletedOrders)
-                .FirstOrDefaultAsync(b => b.Id == id);
-            return result;
+        public async Task<Option<Barista>> Get(Guid id) =>
+            (await _dbContext
+                .Baristas
+                //.Include(b => b.CompletedOrders)
+                .FirstOrDefaultAsync(b => b.Id == id))
+                .SomeNotNull();
 
-        }
-
-        public async Task<Barista> Update(Barista barista)
+        public async Task<Unit> Update(Barista barista)
         {
-            var result =  _dbContext.Baristas.Update(barista);
+            _dbContext.Baristas.Update(barista);
             await _dbContext.SaveChangesAsync();
-            return result.Entity;
+            return Unit.Value;
         }
     }
 }

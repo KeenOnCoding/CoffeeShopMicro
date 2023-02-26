@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\CoffeeShopMicro.Tools\CoffeeShopMicro.Tools.csproj" />
     <ProjectReference Include="..\CoffeeShopMicro.Barista.Domain\CoffeeShopMicro.Barista.Domain.csproj" />
   </ItemGroup>
 

@@ -2,13 +2,15 @@
 {
     using MediatR;
     using CoffeeShopMicro.Barista.Domain.Entities;
+    using System;
+    using CoffeeShopMicro.Tools.Optional;
 
     public interface IBaristaRepository
     {
-        Task<Barista> Get(Guid id);
+        Task<Option<Barista>> Get(Guid id);
 
-        Task<Barista> Update(Barista barista);
+        Task<Unit> Update(Barista barista);
 
-        Task<Barista> Add(Barista barista);
+        Task<Unit> Add(Barista barista);
     }
 }

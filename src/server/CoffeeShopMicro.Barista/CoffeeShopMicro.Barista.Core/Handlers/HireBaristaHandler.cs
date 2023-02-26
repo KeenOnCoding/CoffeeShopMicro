@@ -1,40 +1,40 @@
 ﻿namespace CoffeeShopMicro.Barista.Core.Handlers
 {
-    using AutoMapper;
     using CoffeeShopMicro.Barista.Core.Commands;
-    using CoffeeShopMicro.Barista.Domain.Events;
     using CoffeeShopMicro.Barista.Domain.Entities;
-    using FluentValidation;
     using MediatR;
+    using AutoMapper;
     using CoffeeShopMicro.Barista.Domain.Repositories;
-    using System.Data;
-    using System.ComponentModel.Design;
-    using System.Threading;
-    using System.Security.Cryptography.X509Certificates;
-    using CoffeeShopMicro.Barista.Data;
+    using FluentValidation;
+    using CoffeeShopMicro.Tools.Handlers;
+    using CoffeeShopMicro.Tools.Error;
+    using CoffeeShopMicro.Tools.Events;
+    using CoffeeShopMicro.Tools.Optional;
 
-    public class HireBaristaHandler : ICommandHandler<HireBarista>
+    public class HireBaristaHandler : BaseHandler<HireBarista>
     {
-        private readonly ApplicationDbContext _baristaRepository;
+        private readonly IBaristaRepository _baristaRepository;
+
         public HireBaristaHandler(
-            ApplicationDbContext baristaRepository)
+            IValidator<HireBarista> validator,
+            IEventBus eventBus,
+            IMapper mapper,
+            IBaristaRepository baristaRepository)
+            : base(validator, eventBus, mapper)
         {
             _baristaRepository = baristaRepository;
         }
 
+        public override Task<Option<Unit, Error>> Handle(HireBarista command) =>
+            BaristaShouldNotExist(command.Id).MapAsync(_ =>
+            Persist(Mapper.Map<Barista>(command)));
 
+        private Task<Unit> Persist(Barista barista) =>
+            _baristaRepository.Add(barista);
 
-
-        public async Task<Unit> Handle(HireBarista command, CancellationToken cancellationToken)
-        {
-            //var result = await _baristaRepository.Get(command.Id);
-
-
-                var val =  _baristaRepository.Add(new Barista { ShortName  = command.ShortName });
-
-            await _baristaRepository.SaveChangesAsync();
-            return Unit.Value;
-
-        }
+        private async Task<Option<Unit, Error>> BaristaShouldNotExist(Guid id) =>
+            (await _baristaRepository.Get(id))
+                .SomeWhen(b => !b.HasValue, Error.Conflict($"Barista {id} already exists."))
+                .Map(_ => Unit.Value);
     }
 }
