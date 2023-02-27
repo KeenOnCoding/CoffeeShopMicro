@@ -16,11 +16,12 @@
         private readonly IBaristaRepository _baristaRepository;
 
         public HireBaristaHandler(
-            IValidator<HireBarista> validator,
-            IEventBus eventBus,
+           // IValidator<HireBarista> validator,
+            //IEventBus eventBus,
             IMapper mapper,
-            IBaristaRepository baristaRepository)
-            : base(validator, eventBus, mapper)
+            IBaristaRepository baristaRepository) :
+            //: base(validator, eventBus, mapper)
+            base(mapper)
         {
             _baristaRepository = baristaRepository;
         }

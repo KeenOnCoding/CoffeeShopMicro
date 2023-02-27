@@ -11,15 +11,15 @@ namespace CoffeeShopMicro.Tools.Handlers
         where TCommand : ICommand
     {
         public BaseHandler(
-            IValidator<TCommand> validator,
-            IEventBus eventBus,
+            //IValidator<TCommand> validator,
+            //IEventBus eventBus,
             IMapper mapper)
         {
-            Validator = validator ??
-                throw new InvalidOperationException(
-                    "Tried to instantiate a command handler without a validator." +
-                    "Did you forget to add one?");
-            EventBus = eventBus;
+            //Validator = validator ??
+            //    throw new InvalidOperationException(
+            //        "Tried to instantiate a command handler without a validator." +
+            //        "Did you forget to add one?");
+            //EventBus = eventBus;
             Mapper = mapper;
         }
 

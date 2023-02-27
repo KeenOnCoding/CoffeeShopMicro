@@ -1,13 +1,15 @@
 using CoffeeShopMicro.Barista.Core;
-using CoffeeShopMicro.Barista.Domain;
 using CoffeeShopMicro.Barista.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Extensions.DependencyInjection;
 using CoffeeShopMicro.Barista.Domain.Repositories;
 using CoffeeShopMicro.Barista.Data.Repositories;
+using CoffeeShopMicro.Tools.Extentions;
+using FluentValidation.AspNetCore;
+using FluentValidation;
+using CoffeeShopMicro.Tools.Events;
+using CoffeeShopMicro.Tools;
 
 public class Program
 {
@@ -21,7 +23,7 @@ public class Program
 
         ConfigureRequestPipeline(app);
 
-        MigrationManager.MigrateDatabase(app);
+        //MigrationManager.MigrateDatabase(app);
 
         app.Run();
     }
@@ -38,8 +40,13 @@ public class Program
         builder.Services.AddAutoMapper(typeof(MappingProfile));
 
         builder.Services.AddMediatR();
+        builder.Services.AddHateoas();
         //builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
-
+        //builder.Services.AddCqrs();
+        //builder.Services.AddScoped<IEventBus, EventBus>();
+        builder.Services.AddFluentValidationClientsideAdapters();
+        //builder.Services.AddValidatorsFromAssemblyContaining<RegisterValidator>();
+        builder.Services.AddValidatorsFromAssemblyContaining<Anchor>();
         builder.Services.AddTransient<IBaristaRepository, BaristaRepository>();
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -62,7 +69,7 @@ public class Program
 
         app.MapControllers();
 
-        app.MigrateDatabase();
+        //app.MigrateDatabase();
 
     }
 
