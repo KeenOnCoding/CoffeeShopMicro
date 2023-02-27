@@ -1,7 +1,7 @@
 ﻿
 namespace CoffeeShopMicro.Barista.Core.Commands
 {
-    using CoffeeShopMicro.Tools.Handlers;
+    using CoffeeShopMicro.Barista.Core.Handlers;
 
     public class HireBarista : ICommand
     {

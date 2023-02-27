@@ -6,9 +6,7 @@
     using AutoMapper;
     using CoffeeShopMicro.Barista.Domain.Repositories;
     using FluentValidation;
-    using CoffeeShopMicro.Tools.Handlers;
     using CoffeeShopMicro.Tools.Error;
-    using CoffeeShopMicro.Tools.Events;
     using CoffeeShopMicro.Tools.Optional;
 
     public class HireBaristaHandler : BaseHandler<HireBarista>
@@ -16,12 +14,10 @@
         private readonly IBaristaRepository _baristaRepository;
 
         public HireBaristaHandler(
-           // IValidator<HireBarista> validator,
-            //IEventBus eventBus,
+            IValidator<HireBarista> validator,
             IMapper mapper,
             IBaristaRepository baristaRepository) :
-            //: base(validator, eventBus, mapper)
-            base(mapper)
+            base(validator, mapper)
         {
             _baristaRepository = baristaRepository;
         }

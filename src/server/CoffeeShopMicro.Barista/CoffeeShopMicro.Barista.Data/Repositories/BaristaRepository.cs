@@ -25,7 +25,6 @@
         public async Task<Option<Barista>> Get(Guid id) =>
             (await _dbContext
                 .Baristas
-                //.Include(b => b.CompletedOrders)
                 .FirstOrDefaultAsync(b => b.Id == id))
                 .SomeNotNull();
 

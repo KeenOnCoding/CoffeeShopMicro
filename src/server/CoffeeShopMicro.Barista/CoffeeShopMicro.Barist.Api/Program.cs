@@ -6,10 +6,9 @@ using System.Reflection;
 using CoffeeShopMicro.Barista.Domain.Repositories;
 using CoffeeShopMicro.Barista.Data.Repositories;
 using CoffeeShopMicro.Tools.Extentions;
-using FluentValidation.AspNetCore;
 using FluentValidation;
-using CoffeeShopMicro.Tools.Events;
-using CoffeeShopMicro.Tools;
+using CoffeeShopMicro.Barista.Core.Commands;
+using CoffeeShopMicro.Barista.Core.Validators;
 
 public class Program
 {
@@ -33,27 +32,17 @@ public class Program
 
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseNpgsql(
-                 //connstr, x => x.MigrationsAssembly(typeof(ApplicationDbContext).GetTypeInfo().Assembly.GetName().Name)));
                  builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new Exception(),
                  x => x.MigrationsAssembly(typeof(Program).GetTypeInfo().Assembly.GetName().Name)));
 
         builder.Services.AddAutoMapper(typeof(MappingProfile));
-
         builder.Services.AddMediatR();
         builder.Services.AddHateoas();
-        //builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
-        //builder.Services.AddCqrs();
-        //builder.Services.AddScoped<IEventBus, EventBus>();
-        builder.Services.AddFluentValidationClientsideAdapters();
-        //builder.Services.AddValidatorsFromAssemblyContaining<RegisterValidator>();
-        builder.Services.AddValidatorsFromAssemblyContaining<Anchor>();
+        builder.Services.AddScoped<IValidator<HireBarista>, HireBaristaValidator>();
         builder.Services.AddTransient<IBaristaRepository, BaristaRepository>();
         builder.Services.AddControllers();
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
-
-
     }
     private static void ConfigureRequestPipeline(WebApplication app)
     {
@@ -62,8 +51,6 @@ public class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-
-        //app.UseHttpsRedirection();
 
         app.UseAuthorization();
 

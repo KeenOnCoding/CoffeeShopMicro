@@ -1,11 +1,12 @@
-﻿using AutoMapper;
-using CoffeeShopMicro.Barista.Core.Commands;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿
 
 namespace CoffeeShopMicro.Barista.Api.Controllers
 {
+    using AutoMapper;
+    using CoffeeShopMicro.Barista.Core.Commands;
+    using MediatR;
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("[controller]")]
     public class BaristaController : Controller
     {

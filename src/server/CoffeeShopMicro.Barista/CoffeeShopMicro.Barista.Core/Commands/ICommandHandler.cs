@@ -1,6 +1,6 @@
 ﻿
 
-namespace CoffeeShopMicro.Tools.Handlers
+namespace CoffeeShopMicro.Barista.Core.Handlers
 {
     using CoffeeShopMicro.Tools.Optional;
     using MediatR;
@@ -12,7 +12,7 @@ namespace CoffeeShopMicro.Tools.Handlers
     }
 
     public interface ICommandHandler<in TCommand, TResult> :
-        IRequestHandler<TCommand, Option<TResult, Error.Error>>
+        IRequestHandler<TCommand, Option<TResult, CoffeeShopMicro.Tools.Error.Error>>
         where TCommand : ICommand<TResult>
     {
     }

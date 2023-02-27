@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoffeeShopMicro.Tools.Handlers
+namespace CoffeeShopMicro.Barista.Core.Handlers
 {
     internal interface IQueryHandler
     {

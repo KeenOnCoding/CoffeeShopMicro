@@ -2,7 +2,7 @@
 using MediatR;
 
 
-namespace CoffeeShopMicro.Tools.Handlers
+namespace CoffeeShopMicro.Barista.Core.Handlers
 {
     public interface ICommand : IRequest<Option<Unit, CoffeeShopMicro.Tools.Error.Error>>
     {
